@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список экзаменов</title>
+</head>
+<body>
+    <h1>Список экзаменов</h1>
+    <ul>
+        {% for exam in exams %}
+            <li>
+                <strong>{{ exam.title }}</strong><br>
+                Дата проведения: {{ exam.exam_date }}<br>
+                {% if exam.image %}
+                    <img src="{{ exam.image.url }}" alt="Изображение" width="200"><br>
+                {% endif %}
+                Опубликовано: {{ exam.is_public|yesno:"Да,Нет" }}
+            </li>
+            <hr>
+        {% empty %}
+            <li>Экзамены не найдены.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

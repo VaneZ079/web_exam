@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('exham/', include('exam.urls')),  # Подключаем urls из приложения exam
+    path('', include('exam.urls')),
 ]
 
 if settings.DEBUG:

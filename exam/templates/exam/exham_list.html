@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Экзамен - Список</title>
+</head>
+<body>
+    <h1>Страница экзамена</h1>
+    <h2>{{ fio }} — {{ group_number }}</h2>
+
+    <h3>Опубликованные записи модели Izexam:</h3>
+
+    {% if exams %}
+        {% for exam in exams %}
+            <div style="margin-bottom: 30px; padding: 10px; border: 1px solid #ccc;">
+                <p><strong>Название:</strong> {{ exam.title }}</p>
+                <p><strong>Дата создания:</strong> {{ exam.create_date }}</p>
+                <p><strong>Дата экзамена:</strong> {{ exam.exam_date }}</p>
+                <p><strong>Изображение:</strong><br>
+                    {% if exam.image %}
+                        <img src="{{ exam.image.url }}" alt="Изображение" width="150">
+                    {% else %}
+                        Нет изображения
+                    {% endif %}
+                </p>
+                <p><strong>Участники:</strong>
+                    {% if exam.write_users.exists %}
+                        {% for user in exam.write_users.all %}
+                            {{ user.username }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        Нет пользователей
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Нет опубликованных записей</p>
+    {% endif %}
+
+</body>
+</html>
